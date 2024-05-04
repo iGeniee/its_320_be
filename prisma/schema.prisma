@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model ToDoItem {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  itemName  String
+  //database  Database @relation(fields: [databaseId], references: [id])
+  //databaseId String
+}
+
+model Database {
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  owner    String
+  //items    ToDoItem[]
+}
