@@ -12,7 +12,7 @@ app.use(cors());
 
 app.post("/save", async (req: Request, res: Response) => {
     const   itemName = req.body;
-    console.log(itemName + ' is null')
+    console.log(itemName)
     try {
       const newItem = await prisma.ToDoItem.create({
         data: {
