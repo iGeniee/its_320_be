@@ -29,14 +29,15 @@ app.post("/save", async (req: Request, res: Response) => {
 
   app.post("/all", async (req: Request, res: Response) => {
     try {
-    const itemName = req.body;
-    const allItem = await Promise.all(itemName.map(async(item: any)=>{
-      const newItem = await prisma.ToDoItem.create({
-        data: {
-         itemName: allItem
-        },
-      });
-    }))
+      const itemName = req.body;
+      const allItem = await Promise.all(itemName.map(async(item: any)=>{
+        const newItem = await prisma.ToDoItem.create({
+          data: {
+            itemName: item // Change allItem to item
+          },
+        });
+        return newItem; // Return newItem to store the result
+      }))
       res.status(201).json(allItem);
     } catch (error) {
       console.error("Error inserting data:", error);
